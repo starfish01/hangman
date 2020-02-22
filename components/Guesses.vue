@@ -7,7 +7,9 @@
           <p class="title">Successful</p>
           <p>
             <template v-for="letter in getGuesses">
-              <span v-if="wordData.indexOf(letter) != -1" :key="letter"> {{letter}},</span>
+              <span v-if="wordData.indexOf(letter) != -1" :key="letter">
+                {{ letter }},</span
+              >
             </template>
           </p>
         </article>
@@ -17,7 +19,9 @@
           <p class="title">Failed</p>
           <p>
             <template v-for="letter in getGuesses">
-              <span v-if="wordData.indexOf(letter) === -1" :key="letter"> {{letter}},</span>
+              <span v-if="wordData.indexOf(letter) === -1" :key="letter">
+                {{ letter }},</span
+              >
             </template>
           </p>
         </article>
