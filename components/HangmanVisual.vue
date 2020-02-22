@@ -1,15 +1,12 @@
 <template>
   <div>
-    <h3 class="subtitle is-3 text-sentence-case">
-      {{ getLeftFalseGuesses }}/6
-    </h3>
+    <h3 class="subtitle is-3 text-sentence-case">{{ getLeftFalseGuesses }}/5</h3>
     <br />
-
     <canvas id="board-canvas"></canvas>
     <h3 class="subtitle is-3 text-sentence-case">
       <span v-for="letter in wordData" :key="letter">
-        <template v-if="getGuesses.indexOf(letter) === -1"> _</template>
-        <template v-else> {{ letter }}</template>
+        <template v-if="getGuesses.indexOf(letter) === -1">_</template>
+        <template v-else>{{ letter }}</template>
       </span>
     </h3>
   </div>
@@ -28,33 +25,6 @@ export default {
     var c = document.getElementById("board-canvas");
     this.vueCanvas = c.getContext("2d");
     this.vueCanvas.clearRect(0, 0, 400, 200);
-
-    // structure
-    this.vueCanvas.moveTo(100, 140);
-    this.vueCanvas.lineTo(20, 140);
-    this.vueCanvas.lineTo(20, 20);
-    this.vueCanvas.lineTo(100, 20);
-    this.vueCanvas.lineTo(100, 30);
-    this.vueCanvas.stroke();
-    // head
-    this.vueCanvas.beginPath();
-    this.vueCanvas.arc(100, 40, 10, 0, 2 * Math.PI);
-    this.vueCanvas.stroke();
-    //body
-    this.vueCanvas.moveTo(100, 50);
-    this.vueCanvas.lineTo(100, 100);
-    this.vueCanvas.stroke();
-    //hands
-    this.vueCanvas.moveTo(70, 65);
-    this.vueCanvas.lineTo(100, 70);
-    this.vueCanvas.lineTo(130, 65);
-    this.vueCanvas.stroke();
-
-    //legs
-    this.vueCanvas.moveTo(85, 120);
-    this.vueCanvas.lineTo(100, 100);
-    this.vueCanvas.lineTo(115, 120);
-    this.vueCanvas.stroke();
   },
   computed: {
     ...mapGetters({
@@ -63,12 +33,49 @@ export default {
     }),
     getLeftFalseGuesses() {
       let badGuess = 0;
+      // this.vueCanvas.clearRect(0, 0, 400, 200);
 
       _.forEach(this.getGuesses, (value, key) => {
         if (this.wordData.indexOf(value) === -1) {
           badGuess++;
         }
       });
+
+      if (badGuess > 0) {
+        // structure
+        this.vueCanvas.moveTo(100, 140);
+        this.vueCanvas.lineTo(20, 140);
+        this.vueCanvas.lineTo(20, 20);
+        this.vueCanvas.lineTo(100, 20);
+        this.vueCanvas.lineTo(100, 30);
+        this.vueCanvas.stroke();
+      }
+      if (badGuess > 1) {
+        // head
+        this.vueCanvas.beginPath();
+        this.vueCanvas.arc(100, 40, 10, 0, 2 * Math.PI);
+        this.vueCanvas.stroke();
+      }
+      if (badGuess > 2) {
+        //body
+        this.vueCanvas.moveTo(100, 50);
+        this.vueCanvas.lineTo(100, 100);
+        this.vueCanvas.stroke();
+      }
+      if (badGuess > 3) {
+        //hands
+        this.vueCanvas.moveTo(70, 65);
+        this.vueCanvas.lineTo(100, 70);
+        this.vueCanvas.lineTo(130, 65);
+        this.vueCanvas.stroke();
+      }
+      if (badGuess > 4) {
+        //legs
+        this.vueCanvas.moveTo(85, 120);
+        this.vueCanvas.lineTo(100, 100);
+        this.vueCanvas.lineTo(115, 120);
+        this.vueCanvas.stroke();
+      }
 
       return badGuess;
     }

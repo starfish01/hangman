@@ -1,5 +1,5 @@
-export default {
+export default () => ({
     word: '',
-    currentGuesses:['o','i'],
-    playerDetails:[]
-}
+    currentGuesses: ['o', 'i'],
+    playerDetails: []
+})
