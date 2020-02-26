@@ -8,14 +8,12 @@
       class="m-a"
       @click.prevent="submitGuess"
       type="is-primary"
-      >Submit Guess</b-button
-    >
+    >Submit Guess</b-button>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-
 
 export default {
   data() {
@@ -33,9 +31,9 @@ export default {
         return;
       }
       if (this.getGuesses.indexOf(this.name.toLowerCase()) != -1) {
-          alert('You have guessed this');
-          this.name = "";
-          return;
+        alert("You have guessed this");
+        this.name = "";
+        return;
       }
       this.addGuess(this.name.toLowerCase());
       this.name = "";
@@ -44,10 +42,11 @@ export default {
       addGuess: "hangman/addGuess"
     })
   },
-    computed: {
+  computed: {
     ...mapGetters({
       getGuesses: "hangman/getGuesses"
-    })}
+    })
+  }
 };
 </script>
 

@@ -29,19 +29,12 @@ export default {
   computed: {
     ...mapGetters({
       wordData: "hangman/getWord",
-      getGuesses: "hangman/getGuesses"
+      getGuesses: "hangman/getGuesses",
+      getFailedGuesses : "hangman/getFailedGuesses"
     }),
     getLeftFalseGuesses() {
-      let badGuess = 0;
-      // this.vueCanvas.clearRect(0, 0, 400, 200);
 
-      _.forEach(this.getGuesses, (value, key) => {
-        if (this.wordData.indexOf(value) === -1) {
-          badGuess++;
-        }
-      });
-
-      if (badGuess > 0) {
+      if (this.getFailedGuesses > 0) {
         // structure
         this.vueCanvas.moveTo(100, 140);
         this.vueCanvas.lineTo(20, 140);
@@ -50,26 +43,26 @@ export default {
         this.vueCanvas.lineTo(100, 30);
         this.vueCanvas.stroke();
       }
-      if (badGuess > 1) {
+      if (this.getFailedGuesses > 1) {
         // head
         this.vueCanvas.beginPath();
         this.vueCanvas.arc(100, 40, 10, 0, 2 * Math.PI);
         this.vueCanvas.stroke();
       }
-      if (badGuess > 2) {
+      if (this.getFailedGuesses > 2) {
         //body
         this.vueCanvas.moveTo(100, 50);
         this.vueCanvas.lineTo(100, 100);
         this.vueCanvas.stroke();
       }
-      if (badGuess > 3) {
+      if (this.getFailedGuesses > 3) {
         //hands
         this.vueCanvas.moveTo(70, 65);
         this.vueCanvas.lineTo(100, 70);
         this.vueCanvas.lineTo(130, 65);
         this.vueCanvas.stroke();
       }
-      if (badGuess > 4) {
+      if (this.getFailedGuesses > 4) {
         //legs
         this.vueCanvas.moveTo(85, 120);
         this.vueCanvas.lineTo(100, 100);
@@ -77,7 +70,7 @@ export default {
         this.vueCanvas.stroke();
       }
 
-      return badGuess;
+      return this.getFailedGuesses;
     }
   }
 };

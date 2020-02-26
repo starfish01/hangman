@@ -1,5 +1,6 @@
 export default () => ({
     word: '',
     currentGuesses: ['o', 'i'],
-    playerDetails: []
+    playerDetails: [],
+    failedGuess:0
 })
