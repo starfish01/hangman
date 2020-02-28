@@ -2,8 +2,23 @@ export default {
   setWordData(state, word) {
     state.word = word;
   },
+
+  RESET_HANGMAN(state) {
+
+    console.log('something else');
+
+    state.failedGuess
+
+    state.word = '';
+    state.currentGuesses = ['o', 'i'];
+    state.playerDetails = [];
+    state.failedGuess = 0;
+
+    state.word = 'blah';
+  },
+
   addGuess(state, letter) {
-    
+
     state.currentGuesses.push(letter)
 
     // check if its a bad guess

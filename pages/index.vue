@@ -2,8 +2,9 @@
   <section class="section">
     <div class="columns is-mobile is-multiline">
       <HangmanVisual v-if="wordData.length" class="column is-12" />
-      <GuessInput class="column is-12" v-if="getFailedGuesses <= 4"/>
-      <GuessFailed class="column is-12" v-if="getFailedGuesses > 4"/>
+      <GuessInput class="column is-12" v-if="getFailedGuesses <= 4 && !getWin" />
+      <GuessFailed class="column is-12" v-if="getFailedGuesses > 4 && !getWin" />
+      <GuessWin class="column is-12" v-if="getWin" />
       <Guesses class="column is-12" />
     </div>
   </section>
@@ -15,7 +16,7 @@ import HangmanVisual from "@/components/HangmanVisual";
 import Guesses from "@/components/Guesses";
 import GuessInput from "@/components/GuessInput";
 import GuessFailed from "@/components/GuessFailed";
-
+import GuessWin from "@/components/GuessWin";
 
 export default {
   name: "HomePage",
@@ -23,12 +24,14 @@ export default {
     HangmanVisual,
     Guesses,
     GuessInput,
-    GuessFailed
+    GuessFailed,
+    GuessWin
   },
   computed: {
     ...mapGetters({
       wordData: "hangman/getWord",
-      getFailedGuesses: "hangman/getFailedGuesses"
+      getFailedGuesses: "hangman/getFailedGuesses",
+      getWin: "hangman/getWin"
     })
   },
   methods: {
