@@ -4,7 +4,7 @@
       <HangmanVisual v-if="wordData.length" class="column is-12" :key="visualKey" />
       <GuessInputKeyboard class="column is-12" v-if="getFailedGuesses <= 4 && !getWin" />
       <GuessFailed class="column is-12" v-if="getFailedGuesses > 4 && !getWin" />
-      <GuessWin class="column is-12" v-if="getWin" />
+      <GuessWin class="column is-12" v-if="getWin && wordData.length > 0" />
       <Guesses class="column is-12" />
     </div>
   </section>
