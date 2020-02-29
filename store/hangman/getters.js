@@ -12,6 +12,9 @@ export default {
     getKeys(state) {
         return state.guessableLetters;
     },
+    getHintDisplay(sate) {
+        return sate.displayHint;
+    },
     getWin(state) {
 
         let currentWordLength = state.word.length;

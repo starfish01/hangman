@@ -29,6 +29,9 @@ export default {
 
     state.failedGuess = badGuess;
 
+  },
+  CLOSE_HINT(state) {
+    state.displayHint = false;
   }
 
 }
