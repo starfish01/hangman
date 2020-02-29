@@ -10,7 +10,7 @@
 import { mapActions } from "vuex";
 export default {
   methods: {
-    ...mapActions({ reset: "hangman/resetGame" })
+    ...mapActions({ reset: "hangman/startGame" })
   }
 };
 </script>

@@ -3,18 +3,14 @@ export default {
     state.word = word;
   },
 
-  RESET_HANGMAN(state) {
-
-    console.log('something else');
-
-    state.failedGuess
-
+  RESET_HANGMAN(state, indexOfWord) {
     state.word = '';
-    state.currentGuesses = ['o', 'i'];
+    state.currentGuesses = [];
     state.playerDetails = [];
     state.failedGuess = 0;
+    state.visualKey = state.visualKey + 1;
 
-    state.word = 'blah';
+    state.word = state.wordsToGuess[indexOfWord].toLowerCase();
   },
 
   addGuess(state, letter) {
@@ -24,7 +20,6 @@ export default {
     // check if its a bad guess
     let badGuess = 0;
     let currentWord = state.word;
-    // this.vueCanvas.clearRect(0, 0, 400, 200);
 
     _.forEach(state.currentGuesses, (value, key) => {
       if (currentWord.indexOf(value) === -1) {

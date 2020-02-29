@@ -1,12 +1,9 @@
 export default {
-  getWordData({ commit }) {
-    // todo get words with api
-    const word = "Something".toLowerCase();
+  startGame({ commit }) {
 
-    commit("setWordData", word);
-  },
-  resetGame({ commit }) {
-    console.log('dsdsds');
-    commit('RESET_HANGMAN');
+    let indexOfWord = Math.floor(Math.random() * 600);
+
+    commit('RESET_HANGMAN', indexOfWord);
   }
+
 };

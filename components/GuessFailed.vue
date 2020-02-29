@@ -6,7 +6,7 @@
       <span class="has-text-weight-bold">{{wordData}}</span>
     </p>
     <br />
-    <b-button @click="reset">Play Again?</b-button>
+    <b-button @click="startGame">Play Again?</b-button>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ reset: "hangman/resetGame" })
+    ...mapActions({ startGame: "hangman/startGame" })
   }
 };
 </script>

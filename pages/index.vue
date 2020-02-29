@@ -1,8 +1,8 @@
 <template>
   <section class="section">
     <div class="columns is-mobile is-multiline">
-      <HangmanVisual v-if="wordData.length" class="column is-12" />
-      <GuessInput class="column is-12" v-if="getFailedGuesses <= 4 && !getWin" />
+      <HangmanVisual v-if="wordData.length" class="column is-12" :key="visualKey" />
+      <GuessInputKeyboard class="column is-12" v-if="getFailedGuesses <= 4 && !getWin" />
       <GuessFailed class="column is-12" v-if="getFailedGuesses > 4 && !getWin" />
       <GuessWin class="column is-12" v-if="getWin" />
       <Guesses class="column is-12" />
@@ -14,31 +14,32 @@
 import { mapGetters, mapActions } from "vuex";
 import HangmanVisual from "@/components/HangmanVisual";
 import Guesses from "@/components/Guesses";
-import GuessInput from "@/components/GuessInput";
 import GuessFailed from "@/components/GuessFailed";
 import GuessWin from "@/components/GuessWin";
+import GuessInputKeyboard from "@/components/GuessInputKeyboard";
 
 export default {
   name: "HomePage",
   components: {
     HangmanVisual,
     Guesses,
-    GuessInput,
     GuessFailed,
-    GuessWin
+    GuessWin,
+    GuessInputKeyboard
   },
   computed: {
     ...mapGetters({
       wordData: "hangman/getWord",
       getFailedGuesses: "hangman/getFailedGuesses",
-      getWin: "hangman/getWin"
+      getWin: "hangman/getWin",
+      visualKey: "hangman/visualKey"
     })
   },
   methods: {
-    ...mapActions({ getWordData: "hangman/getWordData" })
+    ...mapActions({ startGame: "hangman/startGame" })
   },
-  created() {
-    this.getWordData();
+  mounted() {
+    this.startGame();
   }
 };
 </script>

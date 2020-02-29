@@ -1,6 +1,6 @@
 export default {
 
-    getWord(state){
+    getWord(state) {
         return state.word;
     },
     getGuesses(state) {
@@ -9,20 +9,26 @@ export default {
     getFailedGuesses(state) {
         return state.failedGuess;
     },
+    getKeys(state) {
+        return state.guessableLetters;
+    },
     getWin(state) {
-        
-      let currentWordLength = state.word.length;
-      let correctGuess = 0;  
-      let currentWord = state.word;
 
-      _.forEach(state.currentGuesses, (value, key) => {
-        if (currentWord.indexOf(value) != -1) {
-            correctGuess++;
-        }
-      });
+        let currentWordLength = state.word.length;
+        let correctGuess = 0;
+        let currentWordArray = state.word.split('');
+        let currentGuessesString = state.currentGuesses.join('');
 
-      return correctGuess === currentWordLength;
+        _.forEach(currentWordArray, (value, key) => {
+            if (currentGuessesString.indexOf(value) != -1) {
+                correctGuess++;
+            }
+        });
 
+        return correctGuess === currentWordLength;
+    },
+    visualKey(state) {
+        return state.visualKey;
     }
 
 }

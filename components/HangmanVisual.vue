@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h3 class="subtitle is-3 text-sentence-case">{{ getLeftFalseGuesses }}/5</h3>
-    <br />
-    <canvas id="board-canvas"></canvas>
-    <h3 class="subtitle is-3 text-sentence-case">
-      <span v-for="letter in wordData" :key="letter">
+    <h3 class="subtitle is-3 text-sentence-case" style="display:none">{{ getLeftFalseGuesses }}/5</h3>
+    <canvas ref="canvasHangman" id="board-canvas"></canvas>
+    <h3 class="subtitle is-3 wordBeingGuessed">
+      <span v-for="(letter, index) in wordData" :key="index">
         <template v-if="getGuesses.indexOf(letter) === -1">_</template>
         <template v-else>{{ letter }}</template>
       </span>
@@ -17,22 +16,30 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      ctx: "",
-      vueCanvas: null
+      ctx: null,
+      vueCanvas: null,
+      c: null,
+      something: 0
     };
   },
+
   mounted() {
-    var c = document.getElementById("board-canvas");
-    this.vueCanvas = c.getContext("2d");
-    this.vueCanvas.clearRect(0, 0, 400, 200);
+    this.c = this.$refs.canvasHangman;
+    this.vueCanvas = this.c.getContext("2d");
+    this.vueCanvas.clearRect(0, 0, 300, 200);
   },
   computed: {
     ...mapGetters({
       wordData: "hangman/getWord",
       getGuesses: "hangman/getGuesses",
-      getFailedGuesses : "hangman/getFailedGuesses"
+      getFailedGuesses: "hangman/getFailedGuesses"
     }),
     getLeftFalseGuesses() {
+      if (this.getFailedGuesses === 0 && this.c !== null) {
+        this.c = this.$refs.canvasHangman;
+        this.vueCanvas = this.c.getContext("2d");
+        this.vueCanvas.clearRect(0, 0, 300, 200);
+      }
 
       if (this.getFailedGuesses > 0) {
         // structure
@@ -44,18 +51,24 @@ export default {
         this.vueCanvas.stroke();
       }
       if (this.getFailedGuesses > 1) {
+        console.log(2);
+        console.log(this.getFailedGuesses);
         // head
         this.vueCanvas.beginPath();
         this.vueCanvas.arc(100, 40, 10, 0, 2 * Math.PI);
         this.vueCanvas.stroke();
       }
       if (this.getFailedGuesses > 2) {
+        console.log(3);
+        console.log(this.getFailedGuesses);
         //body
         this.vueCanvas.moveTo(100, 50);
         this.vueCanvas.lineTo(100, 100);
         this.vueCanvas.stroke();
       }
       if (this.getFailedGuesses > 3) {
+        console.log(4);
+        console.log(this.getFailedGuesses);
         //hands
         this.vueCanvas.moveTo(70, 65);
         this.vueCanvas.lineTo(100, 70);
@@ -63,6 +76,8 @@ export default {
         this.vueCanvas.stroke();
       }
       if (this.getFailedGuesses > 4) {
+        console.log(5);
+        console.log(this.getFailedGuesses);
         //legs
         this.vueCanvas.moveTo(85, 120);
         this.vueCanvas.lineTo(100, 100);
@@ -80,6 +95,9 @@ export default {
 .text-sentence-case {
   text-transform: capitalize;
 }
+.subtitle.is-3.wordBeingGuessed {
+  letter-spacing: 7px;
+}
 
 #board {
   background-color: white;
@@ -88,14 +106,11 @@ export default {
   margin: 10px 0 0 0;
   height: 300px;
   max-width: 500px;
-  /* max-width: 500px;
-  width: 95%;
-  min-height: 400px; */
 }
 #board-canvas {
   background-color: white;
   box-shadow: 0 2px 5px #d0d0d0;
   height: 200px;
-  width: 400px;
+  width: 300px;
 }
 </style>
