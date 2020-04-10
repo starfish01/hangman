@@ -3,9 +3,9 @@
     <div class="columns is-mobile is-multiline">
       <HangmanVisual v-if="wordData.length" class="column is-12" :key="visualKey" />
       <GuessInputKeyboard class="column is-12" v-if="getFailedGuesses <= 4 && !getWin" />
-      <GuessHelperJoke v-if="getHintDisplay" class="column is-12" />
       <GuessFailed class="column is-12" v-if="getFailedGuesses > 4 && !getWin" />
       <GuessWin class="column is-12" v-if="getWin && wordData.length > 0" />
+      <GuessHelperJoke v-if="getHintDisplay" class="column is-12" />
       <Guesses class="column is-12" />
     </div>
   </section>

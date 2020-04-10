@@ -1,16 +1,18 @@
 <template>
   <div class="is-inline-flex">
     <div class="columns is-multiline is-mobile">
-      <div class="column is-2" v-for="(key,index) in getKeys" :key="index">
+      <div class="column is-2" v-for="(key, index) in getKeys" :key="index">
         <b-button
           type="is-primary"
           class="button-input"
           size="is-small"
           @click="submitGuess(key)"
           :disabled="disabledKeys.includes(key)"
-        >{{key}}</b-button>
+          >{{ key }}</b-button
+        >
       </div>
     </div>
+    <br/>
   </div>
 </template>
 
